@@ -21,9 +21,9 @@
     }
 
     public static function newUser($username, $password){
-      $db = Connection::getInstance;
-      $sql = "INSERT into users (username, password) VALUES ". $username . ", " . $password;
-      $db->querry($sql);
+      $db = Connection::getInstance();
+      echo $sql;
+      $db->query($sql);
       return new User($db->lastInsertID(), $username, $password, NULL, NULL, NULL, NULL, NULL, NULL);
     }
   }

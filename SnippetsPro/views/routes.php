@@ -1,10 +1,17 @@
 <?php
   function call($controller, $action) {
+
     // require the file that matches the controller name
     require_once('controllers/' . $controller . '_controller.php');
-    eval("$controler new " . $controller . "Controller()");
+
+    $controller = ucfirst($controller);
+    $evalstr = "\$controler = new " . $controller . "Controller();";
+
+    eval($evalstr);
+    
     $controler->{ $action }();
+
   }
-  
+
   call($controller, $action);
 ?>

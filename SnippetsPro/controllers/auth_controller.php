@@ -6,7 +6,7 @@
 
     public function signup(){
       try {
-        require_once("../models/user_model.php");
+        require_once("models/user_model.php");
 
         $username = $_GET['username'];
         $password = $_GET['password'];

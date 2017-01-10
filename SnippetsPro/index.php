@@ -1,5 +1,10 @@
 <?php
+  ini_set('display_errors', 'On');
+  error_reporting(E_ALL);
+  
   require_once('connection.php');
+
+
 
   if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controller = $_GET['controller'];
