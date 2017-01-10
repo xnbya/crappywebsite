@@ -19,6 +19,12 @@
       return new Snippet($s['snippetID'], $s['userID'], $s['snippetText']);
     }
 
+    static public function delete($snippetID) {
+      $db = Connection::getInstance();
+      $req = $db->query("DELETE FROM snippets WHERE snippetID=" . $snippetID);
+
+    }
+
     static public function all() {
       $list = [];
       $db = Connection::getInstance();
