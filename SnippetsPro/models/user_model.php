@@ -9,12 +9,12 @@
     public $privateSnippetID;
     public $isAdmin;
 
-    public function __construct($userID, $username, $password, $iconURL, $homePageURL, $profileColor, $privateSnippetID, $isAdmin){
+    public function __construct($userID, $username, $password, $iconURL, $homepageURL, $profileColor, $privateSnippetID, $isAdmin){
       $this->userID = $userID;
       $this->username = $username;
       $this->password = $password;
       $this->iconURL = $iconURL;
-      $this->homePageURL = $homePageURL;
+      $this->homepageURL = $homepageURL;
       $this->profileColor = $profileColor;
       $this->privateSnippetID = $privateSnippetID;
       $this->isAdmin = $isAdmin;
@@ -22,9 +22,20 @@
 
     public static function newUser($username, $password){
       $db = Connection::getInstance();
-      echo $sql;
+      $sql = "INSERT into users (username, password) VALUES ('". $username . "', '" . $password . "')";
       $db->query($sql);
       return new User($db->lastInsertID(), $username, $password, NULL, NULL, NULL, NULL, NULL, NULL);
+    }
+
+    public static function getUserByCredentials($username, $password){
+      $db = Connection::getInstance();
+      $sql = "SELECT * FROM users WHERE username = '" . $username . "'";
+      $result = $db->query($sql);
+      $row = $result->fetch();
+      if($password == $row['password']){
+        return new User($row['userID'], $row['username'], $row['password'], $row['iconURL'], $row['homepageURL'], $row['profileColor'], $row['privateSnippetID'], $row['isAdmin']);
+      }
+      return NULL;
     }
   }
 ?>
