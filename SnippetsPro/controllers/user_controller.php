@@ -43,10 +43,3 @@
   }
 ?>
 
-
-
-
-
-A user may set or modify password, URL for an icon, URL for a homepage, profile colour (text description), a private snippet.
-A user may set or modify a user name. 
-
