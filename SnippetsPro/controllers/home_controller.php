@@ -1,20 +1,20 @@
 <?php
   class HomeController {
 
-    public function global() {
-        require_once('controllers/snippetcontroller_controller.php');
-        $SnippetController = new SnippetController();
-        $snippets = SnippetController::all();
+    public function mhome() {
+        require_once('models/snippet_model.php');
+        $Snippet= new Snippet();
+        $snippets = Snippet::all();
         
         if(!is_null($userID)) {
-            $userSnippets = SnippetController::allForUser($userID);
+            $userSnippets = Snippet::allForUser($userID);
         }
     
-        require_once('views/pages/home.php');
+        require_once('views/home/mhome.php');
     }
     
     public function error() {
-        require_once('views/pages/error.php');
+        require_once('views/home/error.php');
     }
     
   }
