@@ -1,4 +1,5 @@
 <?php
+
   function call($controller, $action) {
 
     // require the file that matches the controller name
@@ -14,4 +15,5 @@
   }
 
   call($controller, $action);
+
 ?>
