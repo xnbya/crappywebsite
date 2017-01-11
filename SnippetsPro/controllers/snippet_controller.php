@@ -1,6 +1,7 @@
 <?php
 
 require_once('models/snippet_model.php');
+require_once('models/user_model.php');
 require_once('controllers/auth_controller.php');
 
 class SnippetController {
@@ -27,7 +28,7 @@ class SnippetController {
 
     if (isset($_POST['uid']) || isset($_POST['text'])) {
       Snippet::newSnippet($_POST['uid'], $_POST['text']);
-      header('Location: '. 'index.php?controller=snippet&action=home');
+      header('Location: '. 'index.php?controller=snippet&action=home&uid=' . $_POST['uid']);
     }
     else {
       return call('pages', 'error');
@@ -53,7 +54,6 @@ class SnippetController {
     if(isset($_POST['id'])) {
       Snippet::delete($_POST['id']);
       header('Location: '. 'index.php?controller=snippet&action=home');
-
     }
     else {
       return call('pages', 'error');
