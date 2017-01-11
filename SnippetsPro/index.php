@@ -5,8 +5,8 @@
     $controller = $_GET['controller'];
     $action     = $_GET['action'];
   } else {
-    $controller = 'pages';
-    $action     = 'home';
+    $controller = 'home';
+    $action     = 'global';
   }
 
   require_once('views/layout.php');

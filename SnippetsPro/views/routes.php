@@ -7,8 +7,14 @@
     switch($controller) {
       case '':
       break;
+      
+      case 'home':
+        $controler = new HomeController();
+        break;
     }
-
+    
+    $userID = null;
+    
     // call the action
     $controller->{ $action }();
   }
