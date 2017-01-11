@@ -11,7 +11,7 @@
 				 GROUP BY userID) AS msnip
 				 ON snippets.snippetID = msnip.msid) AS fsnip
 				 ON users.userID = fsnip.userID");
-			return $req->fetch();
+			return $req;
 		}
 	}
 ?>
