@@ -20,6 +20,11 @@
     
       User::set_data($type, $value);
 
+      $user = User::getUserByID($_SESSION["userID"]);
+
+
+      echo var_dump($user);
+
     }
 
 

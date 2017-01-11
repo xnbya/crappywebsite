@@ -1,4 +1,4 @@
-<div style="margin: 100px auto; width: 300px; height: 150px; border: solid; background-color: red;">
+<div style="margin: 100px auto; width: 300px; height: 150px; border: solid;">
 
 	<form action="index.php" method="get">
 
