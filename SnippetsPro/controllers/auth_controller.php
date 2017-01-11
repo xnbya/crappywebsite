@@ -55,6 +55,14 @@
       }
     }
 
+    public function logout(){
+      if (session_status()==PHP_SESSION_ACTIVE){
+        session_abort();
+        session_regenerate_id();
+        session_start();
+      }
+    }
+
     public function authorise(){
       require_once("models/user_model.php");
       if(User::getUserByID(session_id())!=NULL){
