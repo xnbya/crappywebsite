@@ -3,39 +3,39 @@ $user = User::getUserByID($_SESSION["userID"]);
 $user = get_object_vars($user);
 ?>
 
-<div style="text-align: center;">
+<div class="container">
 	<?php
 	echo "<h1>Change user data for <span style=\"color: " . $user['profileColor'] . "\">" . $user['username'] . "</h1>";
 	?>
 
-	<div style="margin:  20px auto; width: 300px; height: 200px; border: solid;">
-
-		<form action="index.php" method="get" style="padding: 0 50px;">
+		<form action="index.php" method="get">
 
 			<input type="hidden" name="controller" value="user">
 			<input type="hidden" name="action" value="set">
-			<p>What to change</p>
+			<div class="form-group">
+				<label for = "type">What to change</label>
 			<!-- <input type="text" name="type"> -->
+				<select name="type" id="typw" class="form-control" style="max-width:400px;">
+						<?php
 
-			<select name="type">
-					<?php
+							foreach ($user as $key => $value) {
+								if ($key=="username" || $key=="password" || $key=="iconURL" || $key=="homepageURL" || $key=="profileColor" || $key=="privateSnippetID") {
+									echo "<option>$key</option>";
+								}
 
-						foreach ($user as $key => $value) {
-							if ($key=="username" || $key=="password" || $key=="iconURL" || $key=="homepageURL" || $key=="profileColor" || $key=="privateSnippetID") {
-								echo "<option>$key</option>";
 							}
 
-						}
+						?>
+				</select>
+			</div>
 
-					?>
-			</select><br>
+			<div class="form-group">
+				<label for="text">Change to what</label>
+				<input type="text" name="value" class="form-control" id="text" style="max-width:400px;">
+			</div>
 
-			<p>Change to what</p>
-			<input type="text" name="value">
-			<input style="margin: 15px auto;" type="submit" value="Submit">
+			<input class="btn btn-default" type="submit" value="Submit">
 
 		</form>
-
-	</div>
 
 </div>
