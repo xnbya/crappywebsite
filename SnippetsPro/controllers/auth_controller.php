@@ -75,6 +75,10 @@
 
       require_once("views/auth/login.php");
     }
+
+    public function signupPage(){
+      require_once("views/auth/signup.php");
+    }
   }
 
 ?>
