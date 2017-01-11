@@ -3,12 +3,13 @@
 
     static public function display() {  
 
+      require_once('models/user_model.php');
       require_once("views/change_user_data.php");
+
     }  
 
 
     static public function set() {
-
 
     require_once('models/user_model.php');
     require_once("controllers/auth_controller.php");
@@ -19,6 +20,11 @@
       $value = $_GET['value'];
     
       User::set_data($type, $value);
+
+      $user = User::getUserByID($_SESSION["userID"]);
+
+
+      echo var_dump($user);
 
     }
 
