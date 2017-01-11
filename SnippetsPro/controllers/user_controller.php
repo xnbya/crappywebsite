@@ -29,6 +29,7 @@
 
       $user = User::getUserByID($_SESSION["userID"]);
       header("Location: index.php?controller=user&action=display");
+
     }
 
 
