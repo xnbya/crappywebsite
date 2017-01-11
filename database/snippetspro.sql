@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `snippets` (
 
 CREATE TABLE IF NOT EXISTS `users` (
 `userID` int(11) NOT NULL,
-  `username` varchar(256) NOT NULL,
+  `username` varchar(256) NOT NULL UNIQUE,
   `password` varchar(256) NOT NULL,
   `iconURL` varchar(256) DEFAULT NULL,
   `homepageURL` varchar(256) DEFAULT NULL,
