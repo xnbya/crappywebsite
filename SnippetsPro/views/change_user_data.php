@@ -1,8 +1,12 @@
-
+<?php
+$user = User::getUserByID($_SESSION["userID"]);
+$user = get_object_vars($user);
+?>
 
 <div style="text-align: center;">
-
-	<h1>Change user data screen</h1>
+	<?php
+	echo "<h1>Change user data for <span style=\"color: " . $user['profileColor'] . "\">" . $user['username'] . "</h1>";
+	?>
 
 	<div style="margin:  20px auto; width: 300px; height: 200px; border: solid;">
 
@@ -14,16 +18,13 @@
 			<!-- <input type="text" name="type"> -->
 
 			<select name="type">
-					<?php 
-
-						$user = User::getUserByID($_SESSION["userID"]);
-						$user = get_object_vars($user);
+					<?php
 
 						foreach ($user as $key => $value) {
 							if ($key=="username" || $key=="password" || $key=="iconURL" || $key=="homepageURL" || $key=="profileColor" || $key=="privateSnippetID") {
-								echo "<option>$key</option>";	
+								echo "<option>$key</option>";
 							}
-							
+
 						}
 
 					?>
@@ -38,5 +39,3 @@
 	</div>
 
 </div>
-
-

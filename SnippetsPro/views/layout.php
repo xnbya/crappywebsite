@@ -11,8 +11,9 @@
         <?php
         if(array_key_exists('userID', $_SESSION)) {
           echo '<li><a href="index.php?controller=snippet&action=home&uid='. $_SESSION['userID'] . '">My snippets</a></li>';
+          echo '<li><a href="index.php?controller=upload&action=viewAll">My uploads</a></li>';
+          echo '<li><a href="index.php?controller=user&action=display">User data</a></li>';
           echo '<li><a href="index.php?controller=auth&action=logout">Log out</a></li>';
-          echo '<li><a href="index.php?controller=user&action=display">Change data</a></li>';
         }
         else {
           echo '<li><a href="index.php?controller=auth&action=loginpage">Log in</a></li>';
