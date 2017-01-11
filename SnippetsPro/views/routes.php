@@ -1,21 +1,19 @@
 <?php
 
-function call($controller, $action) {
-  // require the file that matches the controller name
-  require_once('controllers/' . $controller . '_controller.php');
+  function call($controller, $action) {
 
-  // create a new instance of the needed controller
-  switch($controller) {
-    case 'snippet':
-      $controller = new SnippetController();
-      break;
-    default:
-      break;
+    // require the file that matches the controller name
+    require_once('controllers/' . $controller . '_controller.php');
+
+    $controller = ucfirst($controller);
+    $evalstr = "\$controler = new " . $controller . "Controller();";
+
+    eval($evalstr);
+    
+    $controler->{ $action }();
+
   }
 
-  $controller->{ $action }();
-}
-
-call($controller, $action);
+  call($controller, $action);
 
 ?>
