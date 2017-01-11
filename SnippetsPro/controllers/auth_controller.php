@@ -44,13 +44,13 @@
 
         $u = User::newUser($username, $password);
 
-        echo "Successfully Registered ";
-        echo $u->userID;
-        echo "!";
+        echo "<h2>Successfully Registered ";
+        echo $u->username;
+        echo "!</h2>";
 
       } catch (Exception $e) {
-        echo "Cannot Register!<br/>";
-        echo "Error Message: " . $e->getMessage();
+        echo "<h2>Cannot Register!</h2>";
+        echo "<h3>Error Message: " . $e->getMessage() . "</h3>";
       }
     }
 
@@ -59,6 +59,7 @@
         session_unset();
         session_regenerate_id();
       }
+      header("Location: index.php");
     }
 
      public function authorise(){
