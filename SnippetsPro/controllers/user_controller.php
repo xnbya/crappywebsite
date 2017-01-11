@@ -3,12 +3,13 @@
 
     static public function display() {  
 
+      require_once('models/user_model.php');
       require_once("views/change_user_data.php");
+
     }  
 
 
     static public function set() {
-
 
     require_once('models/user_model.php');
     require_once("controllers/auth_controller.php");
