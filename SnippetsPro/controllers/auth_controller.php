@@ -23,8 +23,7 @@
         session_start();
         $_SESSION['userID'] = $u->userID;
         $_SESSION['username'] = $u->username;
-
-        echo "Successfully Logged in User: " . $u->username;
+        $_SESSION['isAdmin'] = $u->isAdmin;
 
         if (isset($_GET['next'])){
           header("Location: " . urldecode($_GET['next']));
@@ -57,13 +56,12 @@
 
     public function logout(){
       if (session_status()==PHP_SESSION_ACTIVE){
-        session_abort();
-        session_start();
+        session_unset();
         session_regenerate_id();
       }
     }
 
-    public function authorise(){
+     public function authorise(){
       require_once("models/user_model.php");
       if(User::getUserByID(session_id())!=NULL){
         return True;

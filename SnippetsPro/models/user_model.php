@@ -50,20 +50,31 @@
     }
 
 
+    public static function getUserByName($username){
+      $db = Connection::getInstance();
+      $sql = "SELECT * FROM users WHERE username = '" . $username . "'";
+      $result = $db->query($sql);
+      $row = $result->fetch();
+      if(isset($row['userID'])){
+        return new User($row['userID'], $row['username'], $row['password'], $row['iconURL'], $row['homepageURL'], $row['profileColor'], $row['privateSnippetID'], $row['isAdmin']);
+      }
+      return NULL;
+    }
+
     // // function for setting or changing data
     // // possible types include: user name, password, icon URL,
     // // homepage URL, color, private snippet
-    //  static public function set_data($type, $value){
-    //
-    //     // get user id
-    //     $id = $_SESSION["id"];
-    //
-    //     //update a selected type
-    //     $conn = Connection::getInstance();
-    //     $query = $conn->query(" UPDATE users SET $type='$value' WHERE userID="$id" ");
-    //
-    // }
-   
+     static public function set_data($type, $value){
+
+        // get user id
+        $id = $_SESSION["userID"];
+
+        //update a selected type
+        $conn = Connection::getInstance();
+        $query = $conn->query("UPDATE users SET " . $type . "='" . $value . "' WHERE userID=" . $id);
+
+    }
+
 
 
   }
