@@ -3,27 +3,36 @@
   class AuthController {
 
     public function login(){
-      try {
-        require_once("models/user_model.php");
+      require_once("models/user_model.php");
 
+      $username = NULL;
+      $password = NULL;
+      $u = NULL;
+
+      if(isset($_GET['username'])&&isset($_GET['password'])){
         $username = $_GET['username'];
         $password = $_GET['password'];
-
         $u = User::getUserByCredentials($username, $password);
+      }
 
-
+      if ($u != NULL){
         if(session_status()==PHP_SESSION_ACTIVE){
           session_abort();
         }
-        
         session_id($u->userID);
         session_start();
+        $_SESSION['userID'] = $u->userID;
+        $_SESSION['username'] = $u->username;
 
         echo "Successfully Logged in User: " . $u->username;
 
-      } catch (Exception $e) {
+        if (isset($_GET['next'])){
+          header("Location: " . $_GET['next']);
+        }
+        return True;
+      } else {
         echo "Cannot Login!<br/>";
-        echo "Error Message: " . $e->getMessage();
+        return False;
       }
     }
 
@@ -49,11 +58,28 @@
     public function authorise(){
       require_once("models/user_model.php");
       if(User::getUserByID(session_id())!=NULL){
-        echo "Successfully Authorised to Enter Page!";
+        return True;
       } else {
-        echo "Please login to enter!";
-        // Code to redirect to login page with next being the requested page
+        if ($this->login()){
+          return True;
+        } else {
+          header("Location: index.php?controller=auth&action=loginPage&next=".urlencode($_SERVER['REQUEST_URI']));
+        }
       }
+    }
+
+    public function loginPage(){
+      $next = 'index.php';
+      if(isset($_GET['next'])){
+        $next = $_GET['next'];
+        $next = urlencode($next);
+      }
+
+      require_once("views/auth/login.php");
+    }
+
+    public function signupPage(){
+      require_once("views/auth/signup.php");
     }
   }
 

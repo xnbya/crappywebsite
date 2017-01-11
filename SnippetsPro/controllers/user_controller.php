@@ -1,24 +1,25 @@
 <?php
   class UserController {
 
-  	require_once('models/user_model.php');
+    static public function display() {  
 
-  	static public function show_all() {
+      require_once("views/change_user_data.php");
+    }  
 
-  		$all = User::get_all_users();
 
-		require_once('views/home.php');  		
-
-  	}
-
-  
     static public function set() {
+
+
+    require_once('models/user_model.php');
+    require_once("controllers/auth_controller.php");
+
 
     	// read what has to be changed from form
     	$type = $_GET['type'];
-        $value = $_GET['value'];
-        
-        User::set_data($type, $value);
+      $value = $_GET['value'];
+    
+      User::set_data($type, $value);
+
     }
 
 
