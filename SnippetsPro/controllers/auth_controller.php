@@ -11,7 +11,14 @@
 
         $u = User::getUserByCredentials($username, $password);
 
-        $_SESSION['id'] = $u->userID;
+
+        if(session_status()==PHP_SESSION_ACTIVE){
+          session_abort();
+        }
+        
+        session_id($u->userID);
+        session_start();
+
         echo "Successfully Logged in User: " . $u->username;
 
       } catch (Exception $e) {
@@ -40,7 +47,8 @@
     }
 
     public function authorise(){
-      if(isset($_SESSION['id'])){
+      require_once("models/user_model.php");
+      if(User::getUserByID(session_id())!=NULL){
         echo "Successfully Authorised to Enter Page!";
       } else {
         echo "Please login to enter!";

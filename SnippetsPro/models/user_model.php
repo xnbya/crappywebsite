@@ -37,5 +37,16 @@
       }
       return NULL;
     }
+
+    public static function getUserByID($userID){
+      $db = Connection::getInstance();
+      $sql = "SELECT * FROM users WHERE userID = '" . $userID . "'";
+      $result = $db->query($sql);
+      $row = $result->fetch();
+      if(isset($row['userID'])){
+        return new User($row['userID'], $row['username'], $row['password'], $row['iconURL'], $row['homepageURL'], $row['profileColor'], $row['privateSnippetID'], $row['isAdmin']);
+      }
+      return NULL;
+    }
   }
 ?>
