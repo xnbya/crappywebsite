@@ -49,6 +49,7 @@
       return NULL;
     }
 
+
     // // function for setting or changing data
     // // possible types include: user name, password, icon URL,
     // // homepage URL, color, private snippet
@@ -62,6 +63,7 @@
     //     $query = $conn->query(" UPDATE users SET $type='$value' WHERE userID="$id" ");
     //
     // }
+   
 
 
   }
