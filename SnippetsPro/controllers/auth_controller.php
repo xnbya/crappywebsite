@@ -61,7 +61,7 @@
       }
     }
 
-    public function authorise(){
+     public function authorise(){
       require_once("models/user_model.php");
       if(User::getUserByID(session_id())!=NULL){
         return True;
