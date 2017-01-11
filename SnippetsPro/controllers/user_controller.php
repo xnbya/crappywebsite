@@ -1,42 +1,22 @@
 <?php
   class UserController {
 
+  	require_once('models/user_model.php');
 
-  	// fetch all user data
-  	static public function get_all_users($) {
+  	static public function show_all() {
 
-      $conn = Connection::getInstance();
-      $query = $conn->query( "SELECT * FROM users" );
-      
-      $list = [];
-     
-      foreach($query->fetchAll() as $out) {
+  		$all = User::get_all_users();
 
-      	get_last_snippet
-      	snippet_page
-        $list[] = new User($out['userID'], $out['username'], $out['last_snippet'], $out['snippet page']);
+  	}
 
-      }
-
-      return $list;
-    }
-
-
-  	// function for setting or changing data
-  	// possible types include: user name, password, icon URL, 
-  	// homepage URL, color, private snippet
-    static public function set_data(){
+  
+    static public function set() {
 
     	// read what has to be changed from form
     	$type = $_GET['type'];
         $value = $_GET['value'];
-        // get user id
-        $id = sessionID;  
-
-    	//update a selected type
-    	$conn = Connection::getInstance();
-      	$query = $conn->query(" UPDATE users SET $type='$value' WHERE userID="$id" ");
-
+        
+        User::set_data($type, $value);
     }
 
 
