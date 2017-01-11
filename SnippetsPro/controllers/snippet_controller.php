@@ -14,15 +14,17 @@ class SnippetController {
       $snippets = Snippet::all();
     }
 
+    require('views/snippet/form.php');
+
     foreach($snippets as $snip) {
-      require('views/snippet.php');
+      require('views/snippet/snippet.php');
     }
   }
 
   public function add() {
-    if (isset($_GET['uid']) || isset($_GET['text'])) {
-      Snippet::newSnippet($_GET['uid'], $_GET['text']);
-      return call('snippet', 'home');
+    if (isset($_POST['uid']) || isset($_POST['text'])) {
+      Snippet::newSnippet($_POST['uid'], $_POST['text']);
+      header('Location: '. 'index.php?controller=snippet&action=home');
     }
     else {
       return call('pages', 'error');
@@ -33,7 +35,7 @@ class SnippetController {
     if(isset($_GET['id'])) {
       $snip = Snippet::find($_GET['id']);
       if ($snip->snippetID) {
-        require_once('views/snippet.php');
+        require_once('views/snippet/snippet.php');
       }
     }
     else {
@@ -42,9 +44,10 @@ class SnippetController {
   }
 
   public function delete(){
-    if(isset($_GET['id'])) {
-      Snippet::delete($_GET['id']);
-      return call('snippet', 'home');
+    if(isset($_POST['id'])) {
+      Snippet::delete($_POST['id']);
+      header('Location: '. 'index.php?controller=snippet&action=home');
+
     }
     else {
       return call('pages', 'error');
