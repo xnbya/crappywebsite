@@ -27,7 +27,7 @@
         echo "Successfully Logged in User: " . $u->username;
 
         if (isset($_GET['next'])){
-          header("Location: " . $_GET['next']);
+          header("Location: " . urldecode($_GET['next']));
         }
         return True;
       } else {
@@ -58,8 +58,8 @@
     public function logout(){
       if (session_status()==PHP_SESSION_ACTIVE){
         session_abort();
-        session_regenerate_id();
         session_start();
+        session_regenerate_id();
       }
     }
 
@@ -71,7 +71,7 @@
         if ($this->login()){
           return True;
         } else {
-          header("Location: index.php?controller=auth&action=loginPage&next=".urlencode($_SERVER['REQUEST_URI']));
+          header("Location: index.php?controller=auth&action=loginPage&next=http://".$_SERVER['HTTP_HOST'].urlencode($_SERVER['REQUEST_URI']));
         }
       }
     }
