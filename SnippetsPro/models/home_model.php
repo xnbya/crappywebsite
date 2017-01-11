@@ -2,8 +2,8 @@
 	class Home {
 		static public function getAll() {
 			$db = Connection::getInstance();
-			$req = $db->query("SELECT users.userID, users.username, fsnip.snippetText 
-				FROM users LEFT JOIN 
+			$req = $db->query("SELECT users.userID, users.username, fsnip.snippetText, users.profileColor 
+				FROM users LEFT JOIN
 				(SELECT snippets.userID, snippetText FROM snippets
 				 INNER JOIN
 				(SELECT userID, MAX(snippetID) AS msid

@@ -17,9 +17,7 @@
 <h3>Users - Recent Snippets</h3>
 <?php
 	 foreach($all->fetchAll() as $row) {
-		 $user = User::getUserByID($_SESSION["userID"]);
-		 $user = get_object_vars($user);
-		 $pretty_user = "<span style=\"color: " . $user['profileColor'] . "\">" . $user['username'] . "</span>";
+		 $pretty_user = "<span style=\"color: " . $row[3] . "\">" . $row[1] . "</span>";
 		 echo ('<p>' . $pretty_user . ' - ' . $row[2] . '</p>');
 	}
 
