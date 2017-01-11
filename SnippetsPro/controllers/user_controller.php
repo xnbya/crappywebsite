@@ -7,6 +7,8 @@
 
   		$all = User::get_all_users();
 
+		require_once('views/home.php');  		
+
   	}
 
   
