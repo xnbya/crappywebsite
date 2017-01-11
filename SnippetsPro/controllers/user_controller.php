@@ -1,11 +1,27 @@
 <?php
   class UserController {
-    public function setIcon($icon){}
 
-    public function setHome($url){}
+  	require_once('models/user_model.php');
 
-    public function setColor($color){}
+  	static public function show_all() {
 
-    public function setPrivateSnippet($snippet){}
+  		$all = User::get_all_users();
+
+		require_once('views/home.php');  		
+
+  	}
+
+  
+    static public function set() {
+
+    	// read what has to be changed from form
+    	$type = $_GET['type'];
+        $value = $_GET['value'];
+        
+        User::set_data($type, $value);
+    }
+
+
   }
 ?>
+
