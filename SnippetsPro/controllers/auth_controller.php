@@ -66,6 +66,7 @@
 
     public function loginPage(){
       $next = 'index.php';
+      $query = array();
       if(isset($_GET['next'])){
         $next = $_GET['next'];
         $parts = parse_url($next);
