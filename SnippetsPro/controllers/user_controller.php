@@ -29,8 +29,6 @@
 
       $user = User::getUserByID($_SESSION["userID"]);
 
-      echo var_dump($user);
-
     }
 
 
