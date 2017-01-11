@@ -12,10 +12,10 @@
 		echo '</form>';
 	}
  ?>  
-<h3>All Snippets</h3> 
+<h3>Users - Recent Snippets</h3> 
 <?php 
-	foreach ($all as $row) {
-		echo ('<p>' . $row . '</p>'); 
+	 foreach($all->fetchAll() as $row) {
+		echo ('<p>' . $row[1] . ' - ' . $row[2]  . '</p>'); 
 	}
 
 ?>
