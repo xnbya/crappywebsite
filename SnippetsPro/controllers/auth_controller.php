@@ -23,11 +23,10 @@
         session_start();
         $_SESSION['userID'] = $u->userID;
         $_SESSION['username'] = $u->username;
-
-        echo "Successfully Logged in User: " . $u->username;
+        $_SESSION['isAdmin'] = $u->isAdmin;
 
         if (isset($_GET['next'])){
-          header("Location: " . $_GET['next']);
+          header("Location: " . urldecode($_GET['next']));
         }
         return True;
       } else {
@@ -55,6 +54,13 @@
       }
     }
 
+    public function logout(){
+      if (session_status()==PHP_SESSION_ACTIVE){
+        session_unset();
+        session_regenerate_id();
+      }
+    }
+
     public function authorise(){
       require_once("models/user_model.php");
       if(User::getUserByID(session_id())!=NULL){
@@ -63,7 +69,7 @@
         if ($this->login()){
           return True;
         } else {
-          header("Location: index.php?controller=auth&action=loginPage&next=".urlencode($_SERVER['REQUEST_URI']));
+          header("Location: index.php?controller=auth&action=loginPage&next=http://".$_SERVER['HTTP_HOST'].urlencode($_SERVER['REQUEST_URI']));
         }
       }
     }

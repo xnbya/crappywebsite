@@ -6,13 +6,15 @@
     require_once('controllers/' . $controller . '_controller.php');
 
     $controller = ucfirst($controller);
-    $evalstr = "\$controler = new " . $controller . "Controller();";
+    $evalstr = "\$controller = new " . $controller . "Controller();";
 
     eval($evalstr);
     
-    $controler->{ $action }();
+    
+    $controller->{ $action }();
 
   }
+  
 
   call($controller, $action);
 
