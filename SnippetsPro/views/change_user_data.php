@@ -1,4 +1,4 @@
-<div style="width: 300px; height: 150px; border: solid;">
+<div style="margin: 100px auto; width: 300px; height: 150px; border: solid; background-color: red;">
 
 	<form action="index.php" method="get">
 
@@ -9,6 +9,5 @@
 		<input type="submit" value="Submit">
 
 	</form>
-
 
 </div>

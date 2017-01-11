@@ -49,19 +49,21 @@
       return NULL;
     }
 
-    // function for setting or changing data
-    // possible types include: user name, password, icon URL, 
-    // homepage URL, color, private snippet
-     static public function set_data($type, $value){
 
-        // get user id
-        $id = $_SESSION["id"];  
-
-        //update a selected type
-        $conn = Connection::getInstance();
-        $query = $conn->query(" UPDATE users SET $type='$value' WHERE userID="$id" ");
-
-    }
+    // // function for setting or changing data
+    // // possible types include: user name, password, icon URL,
+    // // homepage URL, color, private snippet
+    //  static public function set_data($type, $value){
+    //
+    //     // get user id
+    //     $id = $_SESSION["id"];
+    //
+    //     //update a selected type
+    //     $conn = Connection::getInstance();
+    //     $query = $conn->query(" UPDATE users SET $type='$value' WHERE userID="$id" ");
+    //
+    // }
+   
 
 
   }

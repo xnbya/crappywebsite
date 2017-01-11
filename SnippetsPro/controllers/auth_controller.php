@@ -25,6 +25,10 @@
         $_SESSION['username'] = $u->username;
 
         echo "Successfully Logged in User: " . $u->username;
+
+        if (isset($_GET['next'])){
+          header("Location: " . $_GET['next']);
+        }
         return True;
       } else {
         echo "Cannot Login!<br/>";
@@ -66,14 +70,16 @@
 
     public function loginPage(){
       $next = 'index.php';
-      $query = array();
       if(isset($_GET['next'])){
         $next = $_GET['next'];
-        $parts = parse_url($next);
-        parse_str($parts['query'], $query);
+        $next = urlencode($next);
       }
 
       require_once("views/auth/login.php");
+    }
+
+    public function signupPage(){
+      require_once("views/auth/signup.php");
     }
   }
 
