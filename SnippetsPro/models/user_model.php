@@ -55,11 +55,11 @@
      static public function set_data($type, $value){
 
         // get user id
-        $id = $_SESSION["id"];  
+        $id = $_SESSION['userID'];  
 
         //update a selected type
         $conn = Connection::getInstance();
-        $query = $conn->query(" UPDATE users SET $type='$value' WHERE userID="$id" ");
+        $query = $conn->query(" UPDATE users SET " . $type . "=" .$value . " WHERE userID=" . $id );
 
     }
 
