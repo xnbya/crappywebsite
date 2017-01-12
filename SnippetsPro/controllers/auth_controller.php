@@ -23,8 +23,7 @@
         session_start();
         $_SESSION['userID'] = $u->userID;
         $_SESSION['username'] = $u->username;
-
-        echo "Successfully Logged in User: " . $u->username;
+        $_SESSION['isAdmin'] = $u->isAdmin;
 
         if (isset($_GET['next'])){
           header("Location: " . urldecode($_GET['next']));
@@ -45,25 +44,25 @@
 
         $u = User::newUser($username, $password);
 
-        echo "Successfully Registered ";
-        echo $u->userID;
-        echo "!";
+        echo "<h2>Successfully Registered ";
+        echo $u->username;
+        echo "!</h2>";
 
       } catch (Exception $e) {
-        echo "Cannot Register!<br/>";
-        echo "Error Message: " . $e->getMessage();
+        echo "<h2>Cannot Register!</h2>";
+        echo "<h3>Error Message: " . $e->getMessage() . "</h3>";
       }
     }
 
     public function logout(){
       if (session_status()==PHP_SESSION_ACTIVE){
-        session_abort();
-        session_start();
+        session_unset();
         session_regenerate_id();
       }
+      header("Location: index.php");
     }
 
-    public function authorise(){
+     public function authorise(){
       require_once("models/user_model.php");
       if(User::getUserByID(session_id())!=NULL){
         return True;
