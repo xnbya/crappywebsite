@@ -66,16 +66,15 @@
     // // homepage URL, color, private snippet
      static public function set_data($type, $value){
 
-        // get user id
-        $id = $_SESSION["userID"];
+         if ($type=="username" || $type=="password" || $type=="iconURL" || $type=="homepageURL" || $type=="profileColor" || $type=="privateSnippetID") {
 
-        //update a selected type
-        $conn = Connection::getInstance();
-        $query = $conn->query("UPDATE users SET " . $type . "='" . $value . "' WHERE userID=" . $id);
+          // get user id
+          $id = $_SESSION["userID"];
 
+          //update a selected type
+          $conn = Connection::getInstance();
+          $query = $conn->query("UPDATE users SET " . $type . "='" . $value . "' WHERE userID=" . $id);
+      }
     }
-
-
-
   }
 ?>
