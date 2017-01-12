@@ -10,6 +10,10 @@
     }
 
     public function error() {
+        $error = "";
+        if(isset($_GET['error'])){
+          $error = $_GET['error'];
+        }
         require_once('views/home/error.php');
     }
 

@@ -75,6 +75,8 @@
       $params = array();
       if(isset($_GET['next'])){
         $next = $_GET['next'];
+        $next = urldecode($next);
+
         $parsedNext = parse_url($next);
         parse_str($parsedNext['query'], $params);
       }
