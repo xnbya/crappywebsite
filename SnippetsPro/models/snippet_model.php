@@ -13,9 +13,11 @@
     //pull from DB
     static public function find($snippetID) {
       $db = Connection::getInstance();
-      $req = $db->query("SELECT * FROM snippets WHERE snippetID=" . $snippetID);
+      
+      $sql = $db->prepare("SELECT * FROM snippets WHERE snippetID = ?");
+      $sql->execute(array($snippetID));
+      $s = $sql->fetch();
 
-      $s = $req->fetch();
       return new Snippet($s['snippetID'], $s['userID'], $s['snippetText']);
     }
 
@@ -40,9 +42,11 @@
     static public function allForUser($uid) {
       $list = [];
       $db = Connection::getInstance();
-      $req = $db->query("SELECT * FROM snippets WHERE userID=" . $uid);
+      
+      $sql = $db->prepare("SELECT * FROM snippets WHERE userID = ?");
+      $sql->execute(array($uid));
 
-      foreach($req->fetchAll() as $s) {
+      foreach($sql->fetchAll() as $s) {
         $list[] = new Snippet($s['snippetID'], $s['userID'], $s['snippetText']);
       }
 
@@ -52,10 +56,15 @@
     //add a new snippet to DB
     static public function newSnippet($uid, $snippetText) {
       $db = Connection::getInstance();
-      $insert_query = "INSERT INTO snippets (userID, snippetText) VALUES (" . $uid . ", '" . $snippetText . "')";
+      
+      $sql = $db->prepare("INSERT into snippets (userID, snippetText) VALUES (:userID, :snippetText)");
+      $sql->bindParam(':userID', $uid);
+      $sql->bindParam(':snippetText', $snippetText);
+      $sql->execute();
+      
+      
       $id_query = 'SELECT LAST_INSERT_ID()';
 
-      $db->query($insert_query);
       $id = $db->query($id_query)->fetch();
 
       return new Snippet($id, $uid, $snippetText);
