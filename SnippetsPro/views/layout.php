@@ -25,8 +25,17 @@
             echo '<li><a href="index.php?controller=auth&action=logout">Log out</a></li>';
           }
           else {
-            echo '<li><a href="index.php?controller=auth&action=loginpage">Log in</a></li>';
-            echo '<li><a href="index.php?controller=auth&action=signuppage">Sign up</a></li>';
+            require_once("controllers/auth_controller.php");
+            $auth = New AuthController;
+            if($auth->login()){
+              echo '<li><a href="index.php?controller=snippet&action=home&uid='. $_SESSION['userID'] . '">My snippets</a></li>';
+              echo '<li><a href="index.php?controller=upload&action=viewAll">My uploads</a></li>';
+              echo '<li><a href="index.php?controller=user&action=display">User data</a></li>';
+              echo '<li><a href="index.php?controller=auth&action=logout">Log out</a></li>';
+            } else {
+              echo '<li><a href="index.php?controller=auth&action=loginpage">Log in</a></li>';
+              echo '<li><a href="index.php?controller=auth&action=signuppage">Sign up</a></li>';
+            }
 
           }
           ?>

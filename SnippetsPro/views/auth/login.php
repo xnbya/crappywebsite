@@ -1,7 +1,9 @@
-<form action = "index.php" >
-    <input type = "hidden" name="controller" value="auth">
-    <input type = "hidden" name="action" value="login">
-    <input type = "hidden" name="next" value="<?php echo $next ?>">
+<form action = "<?php echo $next ?>" >
+    <?php
+      foreach ($params as $key => $value) {
+        echo "<input type='hidden' name = '".$key."' value='".$value."'>";
+      }
+    ?>
     <div class="form-group">
       <label for="username">Username:</label>
       <input type="text" name = "username" id="username" class="form-control" style="max-width:400px">
