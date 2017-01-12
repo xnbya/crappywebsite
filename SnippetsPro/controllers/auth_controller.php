@@ -19,7 +19,7 @@
         if(session_status()==PHP_SESSION_ACTIVE){
           session_abort();
         }
-        session_id($u->userID);
+        session_regenerate_id();
         session_start();
         $_SESSION['userID'] = $u->userID;
         $_SESSION['username'] = $u->username;
@@ -59,7 +59,7 @@
 
      public function authorise(){
       require_once("models/user_model.php");
-      if(User::getUserByID(session_id())!=NULL){
+      if(User::getUserByID($_SESSION['userID'])!=NULL){
         return True;
       } else {
         if ($this->login()){
