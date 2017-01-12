@@ -32,7 +32,7 @@
       $sql = "SELECT * FROM users WHERE username = '" . $username . "'";
       $result = $db->query($sql);
       $row = $result->fetch();
-      if($password == $row['password']){
+      if (password_verify($password, $row['password'])) {
         return new User($row['userID'], $row['username'], $row['password'], $row['iconURL'], $row['homepageURL'], $row['profileColor'], $row['privateSnippetID'], $row['isAdmin']);
       }
       return NULL;

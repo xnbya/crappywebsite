@@ -25,6 +25,10 @@
     	$type = $_GET['type'];
       $value = $_GET['value'];
 
+      if ($type == 'password') {
+        $value = password_hash($value, PASSWORD_DEFAULT);
+      }
+
       User::set_data($type, $value);
 
       $user = User::getUserByID($_SESSION["userID"]);
