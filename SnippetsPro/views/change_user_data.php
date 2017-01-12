@@ -17,13 +17,12 @@ $token = UserController::get_token();
 			<div class="form-group">
 				<label for = "type">What to change</label>
 				<select name="type" id="typw" class="form-control" style="max-width:400px;">
-						<?php
-							foreach ($user as $key => $value) {
-								if ($key=="username" || $key=="password" || $key=="iconURL" || $key=="homepageURL" || $key=="profileColor" || $key=="privateSnippetID") {
-									echo "<option>$key</option>";
-								}
-							}
-						?>
+					<option>username</option>
+					<option>password</option>
+					<option>iconURL</option>
+					<option>homepageURL</option>
+					<option>profileColor</option>
+					<option>privateSnippetID</option>
 				</select>
 			</div>
 
