@@ -24,13 +24,8 @@
         $_SESSION['userID'] = $u->userID;
         $_SESSION['username'] = $u->username;
         $_SESSION['isAdmin'] = $u->isAdmin;
-
-        if (isset($_GET['next'])){
-          header("Location: " . urldecode($_GET['next']));
-        }
         return True;
       } else {
-        echo "Cannot Login!<br/>";
         return False;
       }
     }
@@ -77,9 +72,11 @@
 
     public function loginPage(){
       $next = 'index.php';
+      $params = array();
       if(isset($_GET['next'])){
         $next = $_GET['next'];
-        $next = urlencode($next);
+        $parsedNext = parse_url($next);
+        parse_str($parsedNext['query'], $params);
       }
 
       require_once("views/auth/login.php");
