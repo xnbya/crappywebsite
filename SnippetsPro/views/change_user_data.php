@@ -9,7 +9,7 @@ $token = UserController::get_token();
 	echo "<h1>Change user data for <span style=\"color: " . $user['profileColor'] . "\">" . $user['username'] . "</h1>";
 	?>
 
-		<form action="index.php" method="get">
+		<form action="index.php?controller=user&action=set" method="post">
 
 			<input type="hidden" name="controller" value="user">
 			<input type="hidden" name="action" value="set">

@@ -46,9 +46,7 @@
 
     static public function check_valid() {
 
-
-     
-      if( isset($_GET['token']) && ($_GET['token'] == self::get_token())) {
+      if( isset($_POST['token']) && ($_POST['token'] == self::get_token())) {
               return true;
       } 
       else {
@@ -64,8 +62,8 @@
         require_once('models/user_model.php');
 
         // read what has to be changed from form
-        $type =   $_GET['type'] ;
-        $value =  $_GET['value'] ;
+        $type =   $_POST['type'] ;
+        $value =  $_POST['value'] ;
 
         User::set_data($type, $value);
         $user = User::getUserByID($_SESSION["userID"]);
