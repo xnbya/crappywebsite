@@ -22,16 +22,18 @@
 
     public static function newUser($username, $password){
       $db = Connection::getInstance();
-      $sql = "INSERT into users (username, password) VALUES ('". $username . "', '" . $password . "')";
-      $db->query($sql);
+      $sql = $db->prepare("INSERT into users (username, password) VALUES (:username, :password)");
+      $sql->bindParam(':username', $username);
+      $sql->bindParam(':password', $password);
+      $sql->execute();
       return new User($db->lastInsertID(), $username, $password, NULL, NULL, NULL, NULL, NULL, NULL);
     }
 
     public static function getUserByCredentials($username, $password){
       $db = Connection::getInstance();
-      $sql = "SELECT * FROM users WHERE username = '" . $username . "'";
-      $result = $db->query($sql);
-      $row = $result->fetch();
+      $sql = $db->prepare("SELECT * FROM users WHERE username = ?");
+      $sql->execute(array($username));
+      $row = $sql->fetch();
       if($password == $row['password']){
         return new User($row['userID'], $row['username'], $row['password'], $row['iconURL'], $row['homepageURL'], $row['profileColor'], $row['privateSnippetID'], $row['isAdmin']);
       }
@@ -40,9 +42,9 @@
 
     public static function getUserByID($userID){
       $db = Connection::getInstance();
-      $sql = "SELECT * FROM users WHERE userID = '" . $userID . "'";
-      $result = $db->query($sql);
-      $row = $result->fetch();
+      $sql = $db->prepare("SELECT * FROM users WHERE userID = ?");
+      $sql->execute(array($userID));
+      $row = $sql->fetch();
       if(isset($row['userID'])){
         return new User($row['userID'], $row['username'], $row['password'], $row['iconURL'], $row['homepageURL'], $row['profileColor'], $row['privateSnippetID'], $row['isAdmin']);
       }
@@ -52,9 +54,9 @@
 
     public static function getUserByName($username){
       $db = Connection::getInstance();
-      $sql = "SELECT * FROM users WHERE username = '" . $username . "'";
-      $result = $db->query($sql);
-      $row = $result->fetch();
+      $sql = $fb->prepare("SELECT * FROM users WHERE username = ?");
+      $sql->execute(array($username));
+      $row = $sql->fetch();
       if(isset($row['userID'])){
         return new User($row['userID'], $row['username'], $row['password'], $row['iconURL'], $row['homepageURL'], $row['profileColor'], $row['privateSnippetID'], $row['isAdmin']);
       }
