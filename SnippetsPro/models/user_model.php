@@ -69,6 +69,9 @@
         // get user id
         $id = $_SESSION["userID"];
 
+
+        //random' WHERE userID=999; DELETE FROM users; UPDATE users SET username='hacked
+
         //update a selected type
         $conn = Connection::getInstance();
         $query = $conn->query("UPDATE users SET " . $type . "='" . $value . "' WHERE userID=" . $id);

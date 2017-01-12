@@ -14,7 +14,6 @@ $user = get_object_vars($user);
 			<input type="hidden" name="action" value="set">
 			<div class="form-group">
 				<label for = "type">What to change</label>
-			<!-- <input type="text" name="type"> -->
 				<select name="type" id="typw" class="form-control" style="max-width:400px;">
 						<?php
 
