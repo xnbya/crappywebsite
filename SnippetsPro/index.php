@@ -1,4 +1,14 @@
 <?php
+
+  $currentCookieParams = session_get_cookie_params();
+  session_set_cookie_params(
+      $currentCookieParams["lifetime"],
+      $currentCookieParams["path"],
+      $currentCookieParams["domain"],
+      $currentCookieParams["secure"],
+      true  // Don't make cookies accessible to javascript
+  );
+
   session_start();
   require_once('connection.php');
 
