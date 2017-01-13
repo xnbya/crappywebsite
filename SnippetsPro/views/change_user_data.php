@@ -1,31 +1,28 @@
 <?php
 $user = User::getUserByID($_SESSION["userID"]);
 $user = get_object_vars($user);
+$token = UserController::get_token();
 ?>
 
 <div class="container">
 	<?php
-	echo "<h1>Change user data for <span style=\"color: " . $user['profileColor'] . "\">" . $user['username'] . "</h1>";
+	echo "<h1>Change user data for <span style=\"color: " . htmlspecialchars($user['profileColor']) . "\">" . htmlspecialchars($user['username']) . "</h1>";
 	?>
 
-		<form action="index.php" method="get">
+		<form action="index.php?controller=user&action=set" method="post">
 
 			<input type="hidden" name="controller" value="user">
 			<input type="hidden" name="action" value="set">
+			<input type="hidden" name="token" value="<?php echo $token; ?>">
 			<div class="form-group">
 				<label for = "type">What to change</label>
-			<!-- <input type="text" name="type"> -->
 				<select name="type" id="typw" class="form-control" style="max-width:400px;">
-						<?php
-
-							foreach ($user as $key => $value) {
-								if ($key=="username" || $key=="password" || $key=="iconURL" || $key=="homepageURL" || $key=="profileColor" || $key=="privateSnippetID") {
-									echo "<option>$key</option>";
-								}
-
-							}
-
-						?>
+					<option>username</option>
+					<option>password</option>
+					<option>iconURL</option>
+					<option>homepageURL</option>
+					<option>profileColor</option>
+					<option>privateSnippetID</option>
 				</select>
 			</div>
 
