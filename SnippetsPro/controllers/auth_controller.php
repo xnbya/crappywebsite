@@ -39,13 +39,10 @@
 
         $u = User::newUser($username, $password);
 
-        echo "<h2>Successfully Registered ";
-        echo $u->username;
-        echo "!</h2>";
+        echo "<h2>Successfully Registered!</h2>";
 
       } catch (Exception $e) {
         echo "<h2>Cannot Register!</h2>";
-        echo "<h3>Error Message: " . $e->getMessage() . "</h3>";
       }
     }
 
