@@ -62,14 +62,14 @@
         if ($this->login()){
           return True;
         } else {
-          header("Location: index.php?controller=auth&action=loginPage&next=http://".$_SERVER['HTTP_HOST'].urlencode($_SERVER['REQUEST_URI']));
+          header("Location: index.php?controller=auth&action=loginPage&next=".urlencode($_SERVER['REQUEST_URI']));
         }
       }
     }
 
     public function loginPage(){
       $next = 'index.php';
-      $redirect_whitelist = array("http://localhost:8080", "http://127.0.0.1:8080", "https://snippets.alexise.uk", "http://snippets.alexise.uk");
+      $redirect_whitelist = array("/sp/","index.php","?","http://localhost:8080", "http://127.0.0.1:8080", "https://snippets.alexise.uk", "http://snippets.alexise.uk");
       $params = array();
       if(isset($_GET['next'])){
         $next = $_GET['next'];
@@ -80,6 +80,8 @@
         foreach ($redirect_whitelist as $url) {
           $allow = $allow || (is_int(strpos($next, $url)) && strpos($next, $url)==0);
         }
+
+
 
         if(!$allow){
           header("Location: index.php?controller=home&action=error&error=Bad+Request");
