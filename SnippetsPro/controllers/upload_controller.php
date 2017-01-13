@@ -12,7 +12,7 @@ require_once("controllers/auth_controller.php");
             $folder = 'uploads/' . $this->onlyAlpha($_SESSION['userID']);
             $lines = scandir($folder);   
             unset($lines[0]);
-            unset($lines[0]);
+            unset($lines[1]);
             require_once('views/uploads.php');
         }
     }
