@@ -6,7 +6,7 @@ $token = UserController::get_token();
 
 <div class="container">
 	<?php
-	echo "<h1>Change user data for <span style=\"color: " . $user['profileColor'] . "\">" . $user['username'] . "</h1>";
+	echo "<h1>Change user data for <span style=\"color: " . htmlspecialchars($user['profileColor']) . "\">" . htmlspecialchars($user['username']) . "</h1>";
 	?>
 
 		<form action="index.php?controller=user&action=set" method="post">

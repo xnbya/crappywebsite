@@ -35,7 +35,7 @@
         require_once("models/user_model.php");
 
         $username = $_GET['username'];
-        $password = $_GET['password'];
+        $password = password_hash($_GET['password'], PASSWORD_DEFAULT);
 
         $u = User::newUser($username, $password);
 

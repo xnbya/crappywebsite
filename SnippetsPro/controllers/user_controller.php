@@ -58,13 +58,16 @@
     static public function set() {
 
        if(self::check_valid() ) {
-
         require_once('models/user_model.php');
 
         // read what has to be changed from form
         $type =   $_POST['type'] ;
         $value =  $_POST['value'] ;
 
+       if ($type == 'password') {
+        $value = password_hash($value, PASSWORD_DEFAULT);
+       }
+         
         User::set_data($type, $value);
         $user = User::getUserByID($_SESSION["userID"]);
 
