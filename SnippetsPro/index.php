@@ -5,7 +5,7 @@
       $currentCookieParams["lifetime"],
       $currentCookieParams["path"],
       $currentCookieParams["domain"],
-      $currentCookieParams["secure"],
+      true, // Only serve cookies over HTTPS
       true  // Don't make cookies accessible to javascript
   );
 

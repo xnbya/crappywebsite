@@ -39,13 +39,10 @@
 
         $u = User::newUser($username, $password);
 
-        echo "<h2>Successfully Registered ";
-        echo $u->username;
-        echo "!</h2>";
+        echo "<h2>Successfully Registered!</h2>";
 
       } catch (Exception $e) {
         echo "<h2>Cannot Register!</h2>";
-        echo "<h3>Error Message: " . $e->getMessage() . "</h3>";
       }
     }
 
@@ -72,7 +69,7 @@
 
     public function loginPage(){
       $next = 'index.php';
-      $redirect_whitelist = array("http://localhost:8080/sp", "http://127.0.0.1:8080/sp");
+      $redirect_whitelist = array("http://localhost:8080", "http://127.0.0.1:8080", "https://snippets.alexise.uk", "http://snippets.alexise.uk");
       $params = array();
       if(isset($_GET['next'])){
         $next = $_GET['next'];
@@ -85,7 +82,7 @@
         }
 
         if(!$allow){
-          header("Location: http://localhost:8080/sp/?controller=home&action=error&error=Bad+Request");
+          header("Location: index.php?controller=home&action=error&error=Bad+Request");
         }
 
 
