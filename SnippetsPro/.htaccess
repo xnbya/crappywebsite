@@ -6,3 +6,8 @@ Header unset X-Content-Security-Policy
 Header add X-Content-Security-Policy "default-src 'none'; script-src 'self' 'unsafe-inline' ajax.googleapis.com maxcdn.bootstrapcdn.com; style-src 'self' 'unsafe-inline' maxcdn.bootstrapcdn.com; img-src 'self' data:"
 Header unset X-WebKit-CSP
 Header add X-WebKit-CSP "default-src 'none'; script-src 'self' 'unsafe-inline' ajax.googleapis.com maxcdn.bootstrapcdn.com; style-src 'self' 'unsafe-inline' maxcdn.bootstrapcdn.com; img-src 'self' data:"
+
+# Other protections: clickjacking, MIME sniffing, XSS
+Header set X-Frame-Options "deny"
+Header set X-XSS-Protection "1; mode=block"
+Header set X-Content-Type-Options "nosniff"
