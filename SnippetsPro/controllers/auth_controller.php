@@ -19,7 +19,7 @@
         if(session_status()==PHP_SESSION_ACTIVE){
           session_abort();
         }
-        session_id($u->userID);
+        session_regenerate_id();
         session_start();
         $_SESSION['userID'] = $u->userID;
         $_SESSION['username'] = $u->username;
@@ -59,7 +59,7 @@
 
      public function authorise(){
       require_once("models/user_model.php");
-      if(User::getUserByID(session_id())!=NULL){
+      if(User::getUserByID($_SESSION['userID'])!=NULL){
         return True;
       } else {
         if ($this->login()){
@@ -72,9 +72,23 @@
 
     public function loginPage(){
       $next = 'index.php';
+      $redirect_whitelist = array("http://localhost:8080/sp", "http://127.0.0.1:8080/sp");
       $params = array();
       if(isset($_GET['next'])){
         $next = $_GET['next'];
+        $next = urldecode($next);
+
+        $allow = False;
+
+        foreach ($redirect_whitelist as $url) {
+          $allow = $allow || (is_int(strpos($next, $url)) && strpos($next, $url)==0);
+        }
+
+        if(!$allow){
+          header("Location: http://localhost:8080/sp/?controller=home&action=error&error=Bad+Request");
+        }
+
+
         $parsedNext = parse_url($next);
         parse_str($parsedNext['query'], $params);
       }
